@@ -7,7 +7,11 @@ Rem Either between a range or from 0 to a limit
 
 Rem Function to Ask the user the folder path
 :SetFolderPath
-set /p FolderPath="What is the folder path ? "
+IF NOT [%1]==[] (
+    set FolderPath=%1
+) ELSE (
+    set /p FolderPath="What is the folder path ? "
+)
 echo:
 goto :folderPathChecked
 
