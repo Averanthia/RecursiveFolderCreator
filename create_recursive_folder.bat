@@ -106,10 +106,10 @@ IF %loopRangeIncrementCount%==%tmpMaxRange% (
     goto :cleanExit
 ) ELSE (
     set "NUM=00%loopRangeIncrementCount%"
-    set "%FolderPath%=%FolderName%.!NUM:~-3!"
-    md !%FolderPath%!
+    set "DIRNAME=%FolderPath%\%FolderName%.!NUM:~-3!"
+    echo %DIRNAME%
+    md !DIRNAME!
     set /a loopRangeIncrementCount=%loopRangeIncrementCount%+1
-    timeout /t 0
     GOTO :loopRangeIncrement
 )
 
@@ -140,10 +140,10 @@ IF %loopDefinedIncrementCount%==%tmpMaxIncrement% (
     goto :cleanExit
 ) ELSE (
     set "NUM=00%loopDefinedIncrementCount%"
-    set "%FolderPath%=%FolderName%.!NUM:~-3!"
-    md !%FolderPath%!
+    set "DIRNAME=%FolderPath%\%FolderName%.!NUM:~-3!"
+    echo %DIRNAME%
+    md !DIRNAME!
     set /a loopDefinedIncrementCount=%loopDefinedIncrementCount%+1
-    timeout /t 0
     GOTO :loopDefinedIncrement
 )
 
