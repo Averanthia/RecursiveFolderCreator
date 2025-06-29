@@ -5,6 +5,24 @@ Rem This program is a customizable Increment Recursively folder creator.
 Rem You can choose the folder name.
 Rem Either between a range or from 0 to a limit
 
+Rem Function to Ask the user the folder path
+:SetFolderPath
+set /p FolderPath="What is the folder path ? "
+echo:
+goto :folderPathChecked
+
+Rem Check if FolderPath is not given empty otherwise call again the prompt
+:folderPathChecked
+IF NOT [%FolderPath%]==[] (
+    echo "Folder path was set to : %FolderPath%"
+    echo:
+    CALL :FolderNaming
+) ELSE (
+    echo "A correct answer was not defined for the folder name, please try again."
+    echo:
+    CALL :SetFolderPath
+)
+
 Rem Function to Ask the user to make a folder name
 :FolderNaming
 set /p FolderName="What is the folder name you want to Recursively create ? "
@@ -84,8 +102,8 @@ IF %loopRangeIncrementCount%==%tmpMaxRange% (
     goto :cleanExit
 ) ELSE (
     set "NUM=00%loopRangeIncrementCount%"
-    set "DIRNAME=%FolderName%.!NUM:~-3!"
-    md !DIRNAME!
+    set "%FolderPath%=%FolderName%.!NUM:~-3!"
+    md !%FolderPath%!
     set /a loopRangeIncrementCount=%loopRangeIncrementCount%+1
     timeout /t 0
     GOTO :loopRangeIncrement
@@ -118,8 +136,8 @@ IF %loopDefinedIncrementCount%==%tmpMaxIncrement% (
     goto :cleanExit
 ) ELSE (
     set "NUM=00%loopDefinedIncrementCount%"
-    set "DIRNAME=%FolderName%.!NUM:~-3!"
-    md !DIRNAME!
+    set "%FolderPath%=%FolderName%.!NUM:~-3!"
+    md !%FolderPath%!
     set /a loopDefinedIncrementCount=%loopDefinedIncrementCount%+1
     timeout /t 0
     GOTO :loopDefinedIncrement
